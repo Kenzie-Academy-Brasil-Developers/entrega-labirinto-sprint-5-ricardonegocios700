@@ -1,4 +1,5 @@
 const map = [
+  [
   "WWWWWWWWWWWWWWWWWWWWW",
   "W   W     W     W W W",
   "W W W WWW WWWWW W W W",
@@ -14,6 +15,24 @@ const map = [
   "W WWWWWWW WWWWW W W W",
   "W       W       W   W",
   "WWWWWWWWWWWWWWWWWWWWW",
+  ],
+  [
+  "WWWWWWWWWWWWWWWWWWWWW",
+  "W   W     W     W W W",
+  "W W W WWW WWWWW W W W",
+  "W W W   W     W W   W",
+  "W WWWWWWW W WWW W W W",
+  "W         W     W W W",
+  "W WWW WWWWW WWWWW W W",
+  "W W   W   W W     WWW",
+  "W WWWWW W W W WWW W F",
+  "S     W W W W W W W W",
+  "WWWWW W W W W W W W W",
+  "W     W W W   W W W W",
+  "W WWWWWWW WWWWW W W W",
+  "W                   W",
+  "WWWWWWWWWWWWWWWWWWWWW",
+  ]
 ];
 
 const container = (document.querySelector("#container"));
@@ -55,7 +74,7 @@ function criarDivs(arr){
   }
 
 }
-criarDivs(map);
+criarDivs(map[0]);
 
 let divMove = document.getElementById(`move${positionL}_${positionC}`);
 
@@ -80,23 +99,23 @@ function movePlayer(keydown, divMove) {
   if (keyName === "ArrowDown") {
     positionL ++;
     player.style.transform = 'rotate(90deg)';
-    //90
+    
   } 
   if (keyName === "ArrowUp") {
     positionL --;
     player.style.transform = 'rotate(270deg)';
-    //270
+    
   }   
   if (keyName === "ArrowLeft") {
     positionC --;
     player.style.transform = 'rotate(180deg)';
     player.style.transform = 'scaleX(-1)';
-    //180
+    
   } 
   if (keyName === "ArrowRight") {
     positionC ++;
     player.style.transform = 'rotate(0deg)';
-    //0
+    
   } 
 
   valida(keyName);
@@ -113,6 +132,7 @@ function valida(keyName) {
     if (keyName === "ArrowUp")    positionL ++;
     if (keyName === "ArrowLeft")  positionC ++;
     if (keyName === "ArrowRight") positionC --;
+    tocarSom("./audio/pateta_rindo.mp3", 0.15);
   } 
 
   //se class = path => move
@@ -123,14 +143,29 @@ function valida(keyName) {
 
   //
   if (divMove.className === "column start") {
-    positionC ++;
+    //positionC ++;
   }
 
   //se class = finish => alerta de vitória
   if (divMove.className === "column end") {
-    criarDivs(map);
-    startPlayer();
-    alert("Você venceu");
+    tocarSom("./audio/weAreTheChampions.mp3", 0.5);
+    //setTimeout("", 30000);
+    //alert("Você venceu");
+    reiniciar();
   }
   
+}
+
+function tocarSom(som, vol) {
+  let soluco = new Audio(som);
+  soluco.volume = vol;
+  soluco.play();
+}
+
+let resetar = document.getElementById("reset")
+resetar.addEventListener("click", reiniciar)
+
+function reiniciar() {
+  criarDivs(map[0]);
+  startPlayer();
 }

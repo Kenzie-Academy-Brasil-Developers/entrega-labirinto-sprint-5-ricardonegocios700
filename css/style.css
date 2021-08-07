@@ -1,57 +1,91 @@
-body{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#container {
+body {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background-image: url("../img/ceu-azul.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-  .line {
+
+  footer {
+
+  }
+    footer h1 {
+      text-align: center;
+      color: white;
+    }
+    footer button {
+      background-color: blue;
+      color: white;
+    }
+  main {
     display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
   }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+      .line {
+        display: flex;
+      }
+
+      .column {
+        width: 20px;
+        height: 15px;
+      }
+
+        .wall {
+          background-color: aqua;
+        }
+
+        img {
+          width: 100%;
+          animation-duration: 100ms;
+        }
+
+      #img_start {
+        max-width: 150px;
+        margin: 100px 50px 0 0;
+      }
+      
+      #img_finish {
+        max-width: 200px;
+        margin: 100px 0 0 50px;
+      }
+  header {
+
+  }
+
+@media (min-width: 375px) {
+
   .column {
-    width: 20px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
   }
-    .wall {
-      background-color: aqua;
-    }
-    img {
-      width: 100%;
-    }
-#img_start, #img_finish {
-  width: 150px;
-  margin: 100px 50px 0 50px;
+
 }
+@media (min-width: 768px) {
 
-    @media (min-width: 375px) {
+  .column {
+    width: 38px;
+    height: 38px;
+  }
 
-      .column {
-        width: 18px;
-        height: 18px;
-      }
-    
-    }
-    @media (min-width: 768px) {
-    
-      .column {
-        width: 38px;
-        height: 38px;
-      }
-    
-    }
-    @media (min-width: 1024px) {
-    
-      .column {
-        width: 35.5px;
-        height: 35.5px;
-      }
-      img {
-        margin-top: 7.5px;
-      }
-    
-    }
+}
+@media (min-width: 1024px) {
+
+  .column {
+    width: 35.5px;
+    height: 35.5px;
+  }
+  img {
+    margin-top: 7.5px;
+  }
+
+}
