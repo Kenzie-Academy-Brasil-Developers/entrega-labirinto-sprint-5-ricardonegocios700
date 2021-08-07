@@ -4,6 +4,7 @@ body {
   background-image: url("../img/ceu-azul.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100vh;
 }
 
   footer {
@@ -12,6 +13,7 @@ body {
     footer h1 {
       text-align: center;
       color: white;
+      font-size: small;
     }
     footer button {
       background-color: blue;
@@ -36,8 +38,8 @@ body {
       }
 
       .column {
-        width: 20px;
-        height: 15px;
+        width: 10px;
+        height: 10px;
       }
 
         .wall {
@@ -46,46 +48,62 @@ body {
 
         img {
           width: 100%;
-          animation-duration: 100ms;
+          margin-bottom: 5px;
         }
 
       #img_start {
-        max-width: 150px;
-        margin: 100px 50px 0 0;
+        display: none;
       }
       
       #img_finish {
-        max-width: 200px;
-        margin: 100px 0 0 50px;
+        display: none;
       }
   header {
 
   }
-
-@media (min-width: 375px) {
+  
+@media (min-width: 750px) {
+  footer h1 {
+    font-size:x-large;
+  }
 
   .column {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
+  }
+  img {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  #img_start {
+    display: block;
+    max-width: 100px;
+    margin: 40px 35px 0 0;
+  }
+  
+  #img_finish {
+    display: block;
+    max-width: 120px;
+    margin: 40px 0 0 35px;
   }
 
 }
-@media (min-width: 768px) {
 
-  .column {
-    width: 38px;
-    height: 38px;
-  }
-
-}
 @media (min-width: 1024px) {
 
   .column {
-    width: 35.5px;
-    height: 35.5px;
+    width: 27.5px;
+    height: 27.5px;
   }
   img {
     margin-top: 7.5px;
+  }
+  #img_start {
+    max-width: 140px;
+  }
+  
+  #img_finish {
+    max-width: 170px;
   }
 
 }
