@@ -17,6 +17,7 @@ const map = [
 ];
 
 const container = (document.querySelector("#container"));
+let rotation;
 
 //definindo posição inicial
 let positionL  = 9;
@@ -56,13 +57,15 @@ function criarDivs(arr){
 }
 criarDivs(map);
 
+let divMove = document.getElementById(`move${positionL}_${positionC}`);
+
 function startPlayer() {
 
   let player = document.createElement("img");
   player.setAttribute('id', 'player');
-  player.setAttribute('src', './img/super-pateta.png');
+  player.setAttribute('src', './img/super-pateta.jpeg');
   
-  let divMove = document.getElementById(`move${positionL}_${positionC}`);
+  divMove = document.getElementById(`move${positionL}_${positionC}`);
   divMove.appendChild(player);
 
 }
@@ -70,15 +73,31 @@ startPlayer();
 
 document.addEventListener('keydown', movePlayer)
 
-function movePlayer(keydown) {
-
-  let player = document.getElementById("player");
+function movePlayer(keydown, divMove) {
+  console.log(divMove)
   let keyName = keydown.key;
-  
-  if (keyName === "ArrowDown")  positionL ++;
-  if (keyName === "ArrowUp")    positionL --;
-  if (keyName === "ArrowLeft")  positionC --;
-  if (keyName === "ArrowRight") positionC ++;
+
+  if (keyName === "ArrowDown") {
+    positionL ++;
+    player.style.transform = 'rotate(90deg)';
+    //90
+  } 
+  if (keyName === "ArrowUp") {
+    positionL --;
+    player.style.transform = 'rotate(270deg)';
+    //270
+  }   
+  if (keyName === "ArrowLeft") {
+    positionC --;
+    player.style.transform = 'rotate(180deg)';
+    player.style.transform = 'scaleX(-1)';
+    //180
+  } 
+  if (keyName === "ArrowRight") {
+    positionC ++;
+    player.style.transform = 'rotate(0deg)';
+    //0
+  } 
 
   valida(keyName);
 
@@ -98,6 +117,7 @@ function valida(keyName) {
 
   //se class = path => move
   if (divMove.className === "column path") {
+    //colocar rotação na imagem
     divMove.appendChild(player);
   }
 
