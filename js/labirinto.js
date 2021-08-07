@@ -17,9 +17,15 @@ const map = [
 ];
 
 const container = (document.querySelector("#container"));
+
+//definindo posição inicial
 let positionL  = 9;
 let positionC  = 0;
+
 function criarDivs(arr){
+  container.innerHTML = "";
+  positionL  = 9;
+  positionC  = 0;
 
   for(let linha = 0; linha < arr.length; linha++) {
 
@@ -29,9 +35,19 @@ function criarDivs(arr){
     container.appendChild(divLine);
 
     for(let coluna = 0; coluna < line.length; coluna++) {
+
       let divColumn = document.createElement("div");
-      divColumn.setAttribute('class', `column`);
-      divColumn.setAttribute('id', `move${linha}${coluna}`);
+      divColumn.setAttribute('class', 'column path');
+      if (line[coluna] === "W") {
+        divColumn.setAttribute('class', 'column wall')
+      }
+      if (line[coluna] === "F") {
+        divColumn.setAttribute('class', 'column end')
+      }
+      if (line[coluna] === "S") {
+        divColumn.setAttribute('class', 'column start')
+      }
+      divColumn.setAttribute('id', `move${linha}_${coluna}`);
       divLine.appendChild(divColumn);
     }
 
@@ -46,18 +62,55 @@ function startPlayer() {
   player.setAttribute('id', 'player');
   player.setAttribute('src', './img/super-pateta.png');
   
-  let divMove = document.getElementById(`move${positionL}${positionC}`);
+  let divMove = document.getElementById(`move${positionL}_${positionC}`);
   divMove.appendChild(player);
-  console.log(divMove)
-}
-startPlayer()
 
-function movePlayer(tecla) {
-  
-  let player = document.getElementById("player");
-  console.log(player);
-  positionC += 1;
-  let divMove = document.getElementById(`move${positionL}${positionC}`);
-  divMove.appendChild(player);
 }
-//movePlayer("ArrowUp");
+startPlayer();
+
+document.addEventListener('keydown', movePlayer)
+
+function movePlayer(keydown) {
+
+  let player = document.getElementById("player");
+  let keyName = keydown.key;
+  
+  if (keyName === "ArrowDown")  positionL ++;
+  if (keyName === "ArrowUp")    positionL --;
+  if (keyName === "ArrowLeft")  positionC --;
+  if (keyName === "ArrowRight") positionC ++;
+
+  valida(keyName);
+
+}
+
+function valida(keyName) {
+
+  let divMove = document.getElementById(`move${positionL}_${positionC}`);
+  
+  //se é igual class wall => invalido
+  if (divMove.className === "column wall") {
+    if (keyName === "ArrowDown")  positionL --;
+    if (keyName === "ArrowUp")    positionL ++;
+    if (keyName === "ArrowLeft")  positionC ++;
+    if (keyName === "ArrowRight") positionC --;
+  } 
+
+  //se class = path => move
+  if (divMove.className === "column path") {
+    divMove.appendChild(player);
+  }
+
+  //
+  if (divMove.className === "column start") {
+    positionC ++;
+  }
+
+  //se class = finish => alerta de vitória
+  if (divMove.className === "column end") {
+    criarDivs(map);
+    startPlayer();
+    alert("Você venceu");
+  }
+  
+}
