@@ -39,8 +39,8 @@ const container = (document.querySelector("#container"));
 let rotation;
 
 //definindo posição inicial
-let positionL  = 9;
-let positionC  = 0;
+let positionL;
+let positionC;
 
 function criarDivs(arr){
   container.innerHTML = "";
@@ -82,7 +82,7 @@ function startPlayer() {
 
   let player = document.createElement("img");
   player.setAttribute('id', 'player');
-  player.setAttribute('src', './img/super-pateta.jpeg');
+  player.setAttribute('src', './img/super-pateta1.png');
   
   divMove = document.getElementById(`move${positionL}_${positionC}`);
   divMove.appendChild(player);
@@ -91,33 +91,41 @@ function startPlayer() {
 startPlayer();
 
 document.addEventListener('keydown', movePlayer)
-
 function movePlayer(keydown, divMove) {
-  console.log(divMove)
   let keyName = keydown.key;
+  
+  if (positionL === 9 && positionC === 0) {
+    if (keyName === "ArrowRight") {
+      positionC ++;
+      player.style.transform = 'rotate(0deg)';
+      
+    }
+  } else {
 
-  if (keyName === "ArrowDown") {
-    positionL ++;
-    player.style.transform = 'rotate(90deg)';
-    
-  } 
-  if (keyName === "ArrowUp") {
-    positionL --;
-    player.style.transform = 'rotate(270deg)';
-    
-  }   
-  if (keyName === "ArrowLeft") {
-    positionC --;
-    player.style.transform = 'rotate(180deg)';
-    player.style.transform = 'scaleX(-1)';
-    
-  } 
-  if (keyName === "ArrowRight") {
-    positionC ++;
-    player.style.transform = 'rotate(0deg)';
-    
-  } 
+    if (keyName === "ArrowDown") {
+      positionL ++;
+      player.style.transform = 'rotate(90deg)';
+  
+    } 
+    if (keyName === "ArrowUp") {
+      positionL --;
+      player.style.transform = 'rotate(270deg)';
+      
+    } 
+    if (keyName === "ArrowLeft") {
+      positionC --;
+      player.style.transform = 'rotate(180deg)';
+      player.style.transform = 'scaleX(-1)';
+      
+    }
+    if (keyName === "ArrowRight") {
+      positionC ++;
+      player.style.transform = 'rotate(0deg)';
+      
+    }
+  }
 
+ 
   valida(keyName);
 
 }
